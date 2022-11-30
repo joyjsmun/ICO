@@ -1,12 +1,13 @@
 // SPDX-License-Identifier : MIT
 
+
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ICryptoDevs.sol";
 
-contract CrytoDevToken is ERC20, Ownable {
+contract CryptoDevToken is ERC20, Ownable {
     uint256 public constant tokenPrice = 0.001 ether;
     uint256 public constant tokensPerNFT = 10 * 10**18;
     //the max total supply is 10000 for crypto dev tokens
