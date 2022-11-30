@@ -1,6 +1,6 @@
 const {ethers} = require("hardhat");
 require("dotenv").config({path:".env"});
-const {CRYPTO_DEVS_NFT_CONTRACT_ADDRESS} = require("../constants")
+const {CRYPTO_DEVS_NFT_CONTRACT_ADDRESS} = require("../constants");
 
 async function main() {
   // Address of the Crypto Devs NFT contract that you deployed
@@ -17,9 +17,10 @@ async function main() {
   await deployedCryptoDevsTokenContract.deployed();
 
   console.log(
-    "Crypto Devs Token Contract Address:",
-    deployedCryptoDevsTokenContract.address
-  )
+    "Crypto Devs Token Contract Address:", deployedCryptoDevsTokenContract.address
+  );
+
+}
 
   main()
     .then(() => process.exit(0))
