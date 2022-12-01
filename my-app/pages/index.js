@@ -31,8 +31,8 @@ export default function Home(){
       );
 
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         provider
       )
 
@@ -67,8 +67,8 @@ export default function Home(){
     try {
       const provider = await getProviderOrSigner();
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         provider
       );
 
@@ -89,8 +89,8 @@ export default function Home(){
     try {
       const signer = await getProviderOrSigner(true);
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         signer
       );
 
@@ -119,8 +119,8 @@ export default function Home(){
     try {
       const signer = await getProviderOrSigner(true);
       const tokenContract = new Contract (
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         signer
       );
 
@@ -145,8 +145,8 @@ export default function Home(){
     try {
       const provider = await getProviderOrSigner();
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         provider
       );
 
@@ -162,8 +162,8 @@ export default function Home(){
     try {
       const provider = await getProviderOrSigner();
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         provider
       );
         //call the owner function from the contract
@@ -185,8 +185,8 @@ export default function Home(){
     try {
       const signer = await getProviderOrSigner(true);
       const tokenContract = new Contract(
-        TOKEN_CONTRACT_ABI,
         TOKEN_CONTRACT_ADDRESS,
+        TOKEN_CONTRACT_ABI,
         signer
       );
 
@@ -206,7 +206,7 @@ export default function Home(){
 
   const getProviderOrSigner = async (needSigner = false)  => {
     const provider = await web3ModalRef.current.connect();
-    const web3Provider = new providers.web3Provider(provider);
+    const web3Provider = new providers.Web3Provider(provider);
     const {chainId} = await web3Provider.getNetwork();
     if (chainId !== 5){
       window.alert("Change the network to Goerli");
@@ -257,12 +257,15 @@ export default function Home(){
 
     //if owner is connected, withdrawCoins() is called
     if (walletConnected && isOwner) {
-      <div>
+      return (
+        <div>
         <button className={styles.button} onClick={withdrawCoins}>Withdraw Coins</button>
       </div>
+      )
     }
+
     // If tokens to be claimed are greater than 0, Return a claim button
-    if(tokensToBeClaimed) {
+    if(tokensToBeClaimed > 0) {
       return(
         <div>
           <div className={styles.description}>
@@ -276,8 +279,8 @@ export default function Home(){
     }
 
     // if user doenst have any tokens to claim, show the mint button
-    return(
-      <div>
+      return (
+      <div style={{display:"flex-col"}}>
         <div>
           <input 
             type="number"
@@ -287,6 +290,7 @@ export default function Home(){
             className={styles.input}
           />
         </div>
+
         <button 
           className={styles.button}
           disabled={!(tokenAmount > 0)}
@@ -298,7 +302,7 @@ export default function Home(){
     )
   }
 
-  return(
+  return (
     <div>
       <Head>
         <title>Crypto Devs</title>
@@ -307,25 +311,29 @@ export default function Home(){
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Crypto Joy Devs ICO!</h1>
+          <h1 className={styles.title}>Welcome to CryptoDevs ICO!</h1>
           <div className={styles.description}>
-            You can claim or min Crypto Joy Dev tokens"
+            You can claim or mint Crypto Joy Dev tokens here
           </div>
           {walletConnected ? (
             <div>
               <div className={styles.description}>
-                You have minted {utils.formatEther(balanceOfCryptoDevTokens)} Crypto Joy Dev Tokens
+                You have minted {utils.formatEther(balanceOfCryptoDevTokens)} CryptoDev Tokens
               </div>
               <div className={styles.description}>
                 Overall {utils.formatEther(tokensMinted)}/10000 have been minted!!!
               </div>
-              {renderButton}
+              {renderButton()}
             </div>
           ) :(
             <button onClick={connectWallet} className={styles.button}>Connect your wallet</button>
           )}
         </div>
+        <div>
+          <img className={styles.image} src="./0.svg" />
+        </div>
       </div>
+
       
     </div>
   )
