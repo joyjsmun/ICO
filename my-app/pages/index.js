@@ -124,7 +124,7 @@ export default function Home(){
         signer
       );
 
-      const tx  = await tokenContract.claimed();
+      const tx  = await tokenContract.claim();
       setLoading(true);
       //wait for the transaction to get mined
       await tx.wait();
